@@ -3,4 +3,7 @@
 # 2. Convert to lower
 # 3. Look for a string inside one of the elements.
 #
-$EnvList.Where({ $_.ToLower().Contains("apps")  })
+$env:Path.Split(";").Where({ $_.ToLower().Contains("apps")  })
+
+# Manage enviroment path
+$env:Path = $test.Remove($test.Length-$EnvList[50].Length-1)
