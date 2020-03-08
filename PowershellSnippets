@@ -1,0 +1,6 @@
+#
+# 1. Pass a list to where()
+# 2. Convert to lower
+# 3. Look for a string inside one of the elements.
+#
+$EnvList.Where({ $_.ToLower().Contains("apps")  })
