@@ -18,7 +18,12 @@ apt install ufw
 # net/ipv4/ip_forward=1
 # net/ipv6/conf/default/forwarding=1
 # net/ipv6/conf/all/forwarding=1
-#
+# ufw default deny forwarding
+# (Set forwarding from eth0 to eth1)
+# ufw route allow in on eth0 out on eth2
+# or more restricted
+# ufw route allow in on eth0 out on eth1 to 12.34.45.67 port 80 proto tcp
+# 
 
 # Basic syntax:
 # ufw allow from CIDR to CIDR port 27017
