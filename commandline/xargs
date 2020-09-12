@@ -1,0 +1,4 @@
+# Pass arguments to a specific position on the commandline
+# Prints i.eg. D2020-09-12-T23-07 and passes it to mkdir.
+# without -I {} -n 1, xargs would put a space between /root/ and {} - telling mkdir to create two directories: /root and D2020-09-12-T23-07
+sudo date +D%F-T%H-%M | sudo xargs -I {} -n 1 mkdir /root/{}
