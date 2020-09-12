@@ -1,0 +1,19 @@
+#
+# It's a kick in the nuts to get locked out when applying firewall rules.
+# To make this process less painfull, i've created this script to backup the current rules and reset the firewall.
+# Run this in crontab: crontab -e
+# Then */5 * * * * /path/to/script/
+# The script will run every 5 minutes and prevent you from being locked out.
+# When you are done, run crontab -r (WARNING: clears out your crontab) OR comment out the line */5 * * * * * /path/to/script
+
+
+
+#!/bin/bash
+
+timeAndDate=`date +D%F-T%H-%M`
+`echo $timeAndDate | xargs -I {} -n 1 mkdir /root/ufw/{}`
+#`echo $timeAndDate | xargs -I {} -n 1 ufw status verbose >> /root/{}/StatusVerbose`
+`cp -rf /etc/ufw/ /root/ufw/$timeAndDate`
+ufwStatus=`ufw status verbose`
+`echo $ufwStatus | xargs -0 >> /root/ufw/$timeAndDate/ufwStatus`
+ufw reset
