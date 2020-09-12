@@ -1,0 +1,39 @@
+# UFW (Uncomplicated FireWall) is an abstraction upon iptables, allowing easier creation and management of rules.
+
+# Man pages http://manpages.ubuntu.com/manpages/focal/en/man8/ufw.8.html
+
+# Good to know:
+# I've read that UFW applies allow established, related to outgoing connections. Therefor, you don't need to apply these rules yourself.
+# UFW allows ping by default
+# UFW reloads newly applied rules after entering them. No need to manually reload UFW. 
+#
+
+### Requirements
+apt install ufw
+
+# Optional: 
+# Are you going to be routing or forwarding packets?
+# Edit /etc/ufw/sysctl.conf
+# Add:
+# net/ipv4/ip_forward=1
+# net/ipv6/conf/default/forwarding=1
+# net/ipv6/conf/all/forwarding=1
+#
+
+# Basic syntax:
+# ufw allow from CIDR to CIDR port 27017
+# ufw allow out 2222 comment 'This rule needs explaination'
+# 
+# ufw status verbose
+
+# Basic ruleset
+# 
+
+# Run as root or sudo!
+ufw allow 22/tcp
+ufw allow out 53
+ufw allow out 80
+ufw allow out 443
+
+ufw default deny incoming
+ufw default deny outgoing
