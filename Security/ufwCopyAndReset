@@ -9,11 +9,12 @@
 
 
 #!/bin/bash
-
+#Turns out cronjobs have different path.
+ufw=/usr/sbin/ufw
 timeAndDate=`date +D%F-T%H-%M`
 `echo $timeAndDate | xargs -I {} -n 1 mkdir /root/ufw/{}`
 #`echo $timeAndDate | xargs -I {} -n 1 ufw status verbose >> /root/{}/StatusVerbose`
 `cp -rf /etc/ufw/ /root/ufw/$timeAndDate`
-ufwStatus=`ufw status verbose`
+ufwStatus=`$ufw status verbose`
 `echo $ufwStatus | xargs -0 >> /root/ufw/$timeAndDate/ufwStatus`
-ufw reset
+$ufw --force reset
